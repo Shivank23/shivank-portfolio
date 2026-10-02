@@ -19,7 +19,8 @@ import {
   AllReposModal,
 } from './components/ExecutiveModals';
 import { PersonalProject, ImpactMilestone } from './data/portfolioData';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Image as ImageIcon } from 'lucide-react';
+import { BannerDownload } from './components/BannerDownload';
 
 export default function App() {
   const [activeSection, setActiveSection] = React.useState<string>('about');
@@ -29,6 +30,7 @@ export default function App() {
     React.useState<ImpactMilestone | null>(null);
   const [resumeOpen, setResumeOpen] = React.useState<boolean>(false);
   const [reposOpen, setReposOpen] = React.useState<boolean>(false);
+  const [bannerView, setBannerView] = React.useState<boolean>(false);
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
 
   const showNotification = React.useCallback((msg: string) => {
@@ -128,6 +130,10 @@ export default function App() {
     showNotification('Portfolio link copied to clipboard.');
   };
 
+  if (bannerView) {
+    return <BannerDownload onBack={() => setBannerView(false)} />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A]">
       {/* Sticky Top Bar */}
@@ -157,6 +163,15 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Download Banner Button (Temporary for User) */}
+      <button
+        onClick={() => setBannerView(true)}
+        className="fixed bottom-20 right-5 z-40 p-3 bg-white border border-[#E2E8F0] rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all text-[#1E3A8A]"
+        title="Download LinkedIn Banner"
+      >
+        <ImageIcon className="w-6 h-6" />
+      </button>
 
       {/* Interactive Executive Modals */}
       <ProjectSpecModal
