@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, ExternalLink, Globe } from 'lucide-react';
 import { PERSONAL_PROJECTS, PersonalProject } from '../data/portfolioData';
+import { OptimizedImage } from './OptimizedImage';
 
 interface PersonalProjectsSectionProps {
   onOpenProjectSpec: (project: PersonalProject) => void;
@@ -71,17 +72,17 @@ export const PersonalProjectsSection: React.FC<PersonalProjectsSectionProps> = (
                   className="block relative h-44 w-full bg-[#F8FAFC] border-b border-[#E2E8F0] overflow-hidden"
                 >
                   {!imgErrors[project.id] ? (
-                    <img
+                    <OptimizedImage
                       src={project.image}
                       alt={`${project.title} live platform screenshot`}
-                      referrerPolicy="no-referrer"
+                      aspectRatio="11/6"
                       onError={() =>
                         setImgErrors((prev) => ({
                           ...prev,
                           [project.id]: true,
                         }))
                       }
-                      className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+                      className="w-full h-full group-hover:scale-[1.03] transition-transform duration-300"
                     />
                   ) : (
                     <div className="w-full h-full bg-[#F8FAFC] flex flex-col items-center justify-center p-4 text-center">

@@ -13,6 +13,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { HERO_METRICS } from '../data/portfolioData';
+import { OptimizedImage } from './OptimizedImage';
 import shivankPic from '../assets/images/shivank_pic.png';
 
 interface HeroSectionProps {
@@ -180,11 +181,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNotify }) => {
               <div className="flex items-start gap-4 mb-5">
                 {/* Executive Avatar Frame with User Uploaded shivank_pic.png */}
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[8px] bg-[#F8FAFC] border-2 border-[#E2E8F0] shrink-0 flex items-center justify-center overflow-hidden select-none shadow-sm">
-                  <img
+                  <OptimizedImage
                     src={shivankPic}
                     alt="Shivank Pandey"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center"
+                    aspectRatio="1/1"
+                    priority={true}
+                    className="w-full h-full"
                   />
                 </div>
 

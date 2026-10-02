@@ -49,3 +49,13 @@
 .balance-text {
   text-wrap: balance;
 }
+
+/* Rendering Optimization */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
+#about {
+  content-visibility: visible;
+}

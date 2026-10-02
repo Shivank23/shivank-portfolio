@@ -12,15 +12,22 @@ import { PersonalProjectsSection } from './components/PersonalProjectsSection';
 import { ProductionSystemsSection } from './components/ProductionSystemsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import {
-  ProjectSpecModal,
-  MilestoneModal,
-  ResumeModal,
-  AllReposModal,
-} from './components/ExecutiveModals';
 import { PersonalProject, ImpactMilestone } from './data/portfolioData';
-import { CheckCircle2, Image as ImageIcon } from 'lucide-react';
-import { BannerDownload } from './components/BannerDownload';
+import { CheckCircle2, Image as ImageIcon, Loader2 } from 'lucide-react';
+
+// Lazy load non-critical sections and modals
+const BannerDownload = React.lazy(() => import('./components/BannerDownload').then(m => ({ default: m.BannerDownload })));
+const ProjectSpecModal = React.lazy(() => import('./components/ExecutiveModals').then(m => ({ default: m.ProjectSpecModal })));
+const MilestoneModal = React.lazy(() => import('./components/ExecutiveModals').then(m => ({ default: m.MilestoneModal })));
+const ResumeModal = React.lazy(() => import('./components/ExecutiveModals').then(m => ({ default: m.ResumeModal })));
+const AllReposModal = React.lazy(() => import('./components/ExecutiveModals').then(m => ({ default: m.AllReposModal })));
+
+// Loading Fallback
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-[400px]">
+    <Loader2 className="w-8 h-8 animate-spin text-[#1E3A8A]" />
+  </div>
+);
 
 export default function App() {
   const [activeSection, setActiveSection] = React.useState<string>('about');
@@ -131,7 +138,11 @@ export default function App() {
   };
 
   if (bannerView) {
-    return <BannerDownload onBack={() => setBannerView(false)} />;
+    return (
+      <React.Suspense fallback={<LoadingFallback />}>
+        <BannerDownload onBack={() => setBannerView(false)} />
+      </React.Suspense>
+    );
   }
 
   return (
@@ -173,24 +184,26 @@ export default function App() {
         <ImageIcon className="w-6 h-6" />
       </button>
 
-      {/* Interactive Executive Modals */}
-      <ProjectSpecModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
-      <MilestoneModal
-        milestone={selectedMilestone}
-        onClose={() => setSelectedMilestone(null)}
-      />
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
-        onNotify={showNotification}
-      />
-      <AllReposModal
-        isOpen={reposOpen}
-        onClose={() => setReposOpen(false)}
-      />
+      {/* Interactive Executive Modals - Lazy Loaded */}
+      <React.Suspense fallback={null}>
+        <ProjectSpecModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+        <MilestoneModal
+          milestone={selectedMilestone}
+          onClose={() => setSelectedMilestone(null)}
+        />
+        <ResumeModal
+          isOpen={resumeOpen}
+          onClose={() => setResumeOpen(false)}
+          onNotify={showNotification}
+        />
+        <AllReposModal
+          isOpen={reposOpen}
+          onClose={() => setReposOpen(false)}
+        />
+      </React.Suspense>
 
       {/* Subtle Toast Notification */}
       {toastMessage && (
