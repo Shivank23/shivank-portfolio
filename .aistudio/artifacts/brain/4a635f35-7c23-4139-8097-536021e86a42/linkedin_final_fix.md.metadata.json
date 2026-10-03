@@ -1,0 +1,6 @@
+{
+  "summary":  "Perfect LinkedIn Banner Fix (Exact 1584x396 Size).\n- New Design: Content is extremely tight in the middle to fit LinkedIn's 4:1 aspect ratio perfectly.\n- Auto-Crop Feature: I added a client-side cropping tool. When you click 'Download' in the app, it will automatically crop the image to the exact 1584x396 pixels required by LinkedIn.\n- No more manual cropping issues.\n- All official tech and AI icons included.",
+  "updatedAt":  "2026-10-02T19:01:30.995571274Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

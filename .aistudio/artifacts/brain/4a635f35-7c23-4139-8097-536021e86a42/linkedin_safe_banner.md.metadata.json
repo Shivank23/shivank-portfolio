@@ -1,0 +1,6 @@
+{
+  "summary":  "LinkedIn Banner optimized for the 4:1 aspect ratio.\n- Layout: Content is horizontally centered in a 'safe zone' strip to prevent cropping issues on LinkedIn.\n- Size: High-resolution image (16:9) designed to be cropped to 1584 x 396.\n- Content: Full tech stack icons + AI tools + Name & Title.\n- Download: Updated in the app for direct local saving.",
+  "updatedAt":  "2026-10-02T18:41:52.592085254Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
